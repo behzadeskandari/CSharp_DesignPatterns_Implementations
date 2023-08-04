@@ -119,41 +119,41 @@ namespace DesignPattern
 
     #region [Fluent Builder inheritance With Recursive Generics]
 
-    ////is for getting fluent code inherite
-    ////Instead of this we can Use a Sub class Name Builder
-    ////public class PersonOne
-    ////{
-    ////    public string Name { get; set; }
-    ////    public string Position { get; set; }
+    //is for getting fluent code inherite
+    //Instead of this we can Use a Sub class Name Builder
+    //public class PersonOne
+    //{
+    //    public string Name { get; set; }
+    //    public string Position { get; set; }
 
-    ////    public override string ToString()
-    ////    {
-    ////        return $"{nameof(Name)}: {Name}, {nameof(Position)}: {Position}";
-    ////    }
-    ////}
+    //    public override string ToString()
+    //    {
+    //        return $"{nameof(Name)}: {Name}, {nameof(Position)}: {Position}";
+    //    }
+    //}
 
-    ////public class PersonInfoBuilder
-    ////{
-    ////    protected PersonOne person = new PersonOne();
-    ////    public PersonInfoBuilder Callled(string name)
-    ////    {
-    ////        person.Name = name;
-    ////        return this;
-    ////    }
+    //public class PersonInfoBuilder
+    //{
+    //    protected PersonOne person = new PersonOne();
+    //    public PersonInfoBuilder Callled(string name)
+    //    {
+    //        person.Name = name;
+    //        return this;
+    //    }
 
-    ////}
+    //}
 
-    ////public class PersonJobBuilder : PersonInfoBuilder
-    ////{
-    ////    public PersonJobBuilder WorksAs(string position)
-    ////    {
-    ////        person.Position = position;
-    ////        return this;
-    ////    }
-    ////}
-    ///// <summary>
-    ///// STEP 1 Build THe Class
-    ///// </summary>
+    //public class PersonJobBuilder : PersonInfoBuilder
+    //{
+    //    public PersonJobBuilder WorksAs(string position)
+    //    {
+    //        person.Position = position;
+    //        return this;
+    //    }
+    //}
+    /// <summary>
+    /// STEP 1 Build THe Class
+    /// </summary>
     //public class PersonOne
     //{
     //    public string Name { get; set; }
@@ -319,97 +319,105 @@ namespace DesignPattern
     #endregion
 
     #region [Faceted Builder]
-    public class Person
-    {
-        public string StreetAddress, PostCode, City;
-        public string CompanyName, Position;
-        public int annualIncome;
+    //public class Person
+    //{
+    //    public string StreetAddress, PostCode, City;
+    //    public string CompanyName, Position;
+    //    public int annualIncome;
 
-        public override string ToString()
-        {
-            return $"{nameof(StreetAddress)}: {StreetAddress}, {nameof(PostCode)}: {PostCode}, {nameof(City)}: {City}, {nameof(CompanyName)}: {CompanyName}, {nameof(Position)}: {Position}, {nameof(annualIncome)}: {annualIncome}";
+    //    public override string ToString()
+    //    {
+    //        return $"{nameof(StreetAddress)}: {StreetAddress}, {nameof(PostCode)}: {PostCode}, {nameof(City)}: {City}, {nameof(CompanyName)}: {CompanyName}, {nameof(Position)}: {Position}, {nameof(annualIncome)}: {annualIncome}";
 
-        }
+    //    }
 
-    }
+    //}
 
-    public class PersonBuilder1 //facade
-    {
-        protected Person person = new Person();
+    //public static class PersonCreator
+    //{
+    //    public static Person CreatePerson()
+    //    {
+    //       return new Person();
+    //    }
+    //}
+    //public class PersonBuilder1 //facade
+    //{
         
 
-        public PersonJobBuilder Works = new PersonJobBuilder(person);
+    //    protected Person person = new Person();
 
-        public PersonAddressBuilder Lives => new PersonAddressBuilder(person);
+    //    public PersonJobBuilder Works = new PersonJobBuilder(PersonCreator.CreatePerson());
 
-
-        public static implicit operator Person(PersonBuilder1 pb)
-        {
-            return pb.person; 
-        }
-    }
+    //    public PersonAddressBuilder Lives => new PersonAddressBuilder(person);
 
 
-
-    public class PersonJobBuilder : PersonBuilder1
-    {
-        public PersonJobBuilder(Person person)
-        {
-            this.person = person;
-        }
-
-        public PersonJobBuilder At(string companyname)
-        {
-            person.CompanyName = companyname;
-            return this;
-        }
-        public PersonJobBuilder AsA(string position)
-        {
-            person.Position = position;
-            return this;
-        }
-        public PersonJobBuilder Earning(int amount)
-        {
-            person.annualIncome = amount;
-            return this;
-        }
-
-    }
+    //    public static implicit operator Person(PersonBuilder1 pb)
+    //    {
+    //        return pb.person; 
+    //    }
+    //}
 
 
-    public class PersonAddressBuilder : PersonBuilder1
-    {
-        public PersonAddressBuilder(Person person)
-        {
-            this.person = person;
-        }
-        public PersonAddressBuilder Address(string address)
-        {
-            person.StreetAddress = address;
-            return this;
-        }
-        public PersonAddressBuilder PostCode(string postcode)
-        {
-            person.PostCode = postcode;
-            return this;
-        }
-        public PersonAddressBuilder City(string city)
-        {
-            person.City = city;
-            return this;
-        }
-    }
 
-    class ProgramBuilder
-    {
-        public static void MAinMethod4(string[] args)
-        {
-            var pb = new PersonBuilder1();
+    //public class PersonJobBuilder : PersonBuilder1
+    //{
+    //    public PersonJobBuilder(Person person)
+    //    {
+    //        this.person = person;
+    //    }
 
-            Person perosn = pb.Works.At("Factor").AsA("Worker").Earning(12000);
-            Person personDeails = pb.Lives.City("Tehran").Address("Gisha ave 29").PostCode("012WW12211");
-        }
-    }
+    //    public PersonJobBuilder At(string companyname)
+    //    {
+    //        person.CompanyName = companyname;
+    //        return this;
+    //    }
+    //    public PersonJobBuilder AsA(string position)
+    //    {
+    //        person.Position = position;
+    //        return this;
+    //    }
+    //    public PersonJobBuilder Earning(int amount)
+    //    {
+    //        person.annualIncome = amount;
+    //        return this;
+    //    }
+
+    //}
+
+
+    //public class PersonAddressBuilder : PersonBuilder1
+    //{
+    //    public PersonAddressBuilder(Person person)
+    //    {
+    //        this.person = person;
+    //    }
+    //    public PersonAddressBuilder Address(string address)
+    //    {
+    //        person.StreetAddress = address;
+    //        return this;
+    //    }
+    //    public PersonAddressBuilder PostCode(string postcode)
+    //    {
+    //        person.PostCode = postcode;
+    //        return this;
+    //    }
+    //    public PersonAddressBuilder City(string city)
+    //    {
+    //        person.City = city;
+    //        return this;
+    //    }
+    //}
+
+    //class ProgramBuilder
+    //{
+    //    public static void MAinMethod4(string[] args)
+    //    {
+    //        var pb = new PersonBuilder1();
+
+    //        Person perosn = pb.Works.At("Factor").AsA("Worker").Earning(12000);
+    //        Person personDeails = pb.Lives.City("Tehran").Address("Gisha ave 29").PostCode("012WW12211");
+    //    }
+    //}
 
     
     #endregion
